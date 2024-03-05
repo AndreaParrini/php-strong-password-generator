@@ -1,75 +1,5 @@
 <?php
-/* $lettersUppercase = 'ABCDEFGHIJKLMNOPQSRTUVWXYZ';
-$letters = 'abcdefghijklmnopqrstuvwxyz';
-$numbers = '0123456789';
-$specialCharacters = '!@#$%^&*()_+-={}[]|:;"<>,.?/'; */
-
-
-if (isset($_GET['lenght'])) {
-    $lengthPassword = $_GET['lenght'];
-}
-
-function randomLetters()
-{
-    $letters = 'abcdefghijklmnopqrstuvwxyz';
-    $n = rand(0, strlen($letters) - 1);
-
-    return $letters[$n];
-}
-
-function randomLettersUppercase()
-{
-    $lettersUppercase = 'ABCDEFGHIJKLMNOPQSRTUVWXYZ';
-    $n = rand(0, strlen($lettersUppercase) - 1);
-
-    return $lettersUppercase[$n];
-}
-
-function randmoSpecialCharacters()
-{
-    $specialCharacters = '!@#$%^&*()_+-={}[]|:;"<>,.?/';
-    $n = rand(0, strlen($specialCharacters) - 1);
-
-    return $specialCharacters[$n];
-}
-
-function generatePassword($length)
-{
-    $password = '';
-    while (lengthPassword($password, $length)) {
-        if (lengthPassword($password, $length)) {
-            $password .= randomLetters();
-        };
-        if (lengthPassword($password, $length)) {
-            $password .= randomLettersUppercase();
-        };
-        if (lengthPassword($password, $length)) {
-            $password .= rand(0, 9);
-        };
-        if (lengthPassword($password, $length)) {
-            $password .= randmoSpecialCharacters();
-        };
-        /* $password .= randomLetters();
-        $password .= randomLettersUppercase();
-        $password .= rand(0, 9);
-        $password .= randmoSpecialCharacters(); */
-    }
-
-    return str_shuffle($password);
-}
-
-function lengthPassword($pass, $len)
-{
-    if (strlen($pass) < $len) {
-        return true;
-    }
-    return false;
-}
-
-if (isset($lengthPassword)) {
-    var_dump(generatePassword($lengthPassword));
-}
-
+include_once __DIR__ . '/functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -96,11 +26,15 @@ if (isset($lengthPassword)) {
                 Genera
             </button>
         </form>
-        <?php if (isset($lengthPassword)) { ?>
-            <div class="badge text-bg-success p-3">
+        <?php if (isset($lengthPassword) && $lengthPassword === '') : ?>
+            <div class="badge text-bg-danger p-3 mt-4">
+                <?= 'Insert a value before click button' ?>
+            </div>
+        <?php else : ?>
+            <div class="badge text-bg-success p-3 mt-4">
                 <?= generatePassword($lengthPassword); ?>
             </div>
-        <?php }; ?>
+        <?php endif; ?>
     </div>
 
 
