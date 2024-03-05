@@ -1,8 +1,8 @@
 <?php
 
 
-if (isset($_GET['lenght'])) {
-    $lengthPassword = $_GET['lenght'];
+if (isset($_POST['lenght'])) {
+    $lengthPassword = $_POST['lenght'];
 }
 
 function randomLetters()

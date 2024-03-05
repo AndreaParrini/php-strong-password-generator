@@ -15,7 +15,7 @@ include_once __DIR__ . '/functions.php';
 
 <body>
     <div class="container text-center">
-        <form action="" method="get">
+        <form action="" method="post">
             <div class="mb-3">
                 <label for="" class="form-label">Number of password's characters</label>
                 <input type="number" class="form-control w-25 m-auto" name="lenght" id="lenght" aria-describedby="helpId" placeholder="Number of characters" min='4' />
@@ -30,7 +30,7 @@ include_once __DIR__ . '/functions.php';
             <div class="badge text-bg-danger p-3 mt-4">
                 <?= 'Insert a value before click button' ?>
             </div>
-        <?php else : ?>
+        <?php elseif (isset($lengthPassword)) : ?>
             <div class="badge text-bg-success p-3 mt-4">
                 <?= generatePassword($lengthPassword); ?>
             </div>
