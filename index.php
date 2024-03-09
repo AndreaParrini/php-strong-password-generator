@@ -11,7 +11,7 @@ if (isset($_SESSION['error'])) {
 <div class="container">
     <h3 class="text-light text-center">Genera una password sicura</h3>
     <?php if ((isset($error))) : ?>
-        <div class="text-start text-bg-danger p-4 mt-2 mb-2 rounded">
+        <div class="text-bg-danger p-4 mt-2 mb-2 rounded">
             <?= $error ?>
         </div>
     <?php endif; ?>
@@ -78,7 +78,4 @@ if (isset($_SESSION['error'])) {
 
 </div>
 
-
-</body>
-
-</html>
+<?php include __DIR__ . '/footer.php' ?>
