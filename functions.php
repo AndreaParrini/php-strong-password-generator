@@ -1,6 +1,5 @@
 <?php
 
-
 if (isset($_POST['lenght'])) {
     $lengthPassword = $_POST['lenght'];
 }
@@ -33,22 +32,46 @@ function generatePassword($length)
 {
     $password = '';
     while (lengthPassword($password, $length)) {
-        if (lengthPassword($password, $length)) {
-            $password .= randomLetters();
+        if (isset($_POST['letters']) && lengthPassword($password, $length)) {
+            $letters = randomLetters();
+            if ($_POST['repeatCharacters'] === 'no') {
+                if (!str_contains($password, $letters)) {
+                    $password .= $letters;
+                }
+            } else {
+                $password .= $letters;
+            }
         };
-        if (lengthPassword($password, $length)) {
-            $password .= randomLettersUppercase();
+        if (isset($_POST['letters']) && lengthPassword($password, $length)) {
+            $lettersUppercase = randomLettersUppercase();
+            if ($_POST['repeatCharacters'] === 'no') {
+                if (!str_contains($password, $lettersUppercase)) {
+                    $password .= $lettersUppercase;
+                }
+            } else {
+                $password .= $lettersUppercase;
+            }
         };
-        if (lengthPassword($password, $length)) {
-            $password .= rand(0, 9);
+        if (isset($_POST['numbers']) && lengthPassword($password, $length)) {
+            $number = rand(0, 9);
+            if ($_POST['repeatCharacters'] === 'no') {
+                if (!str_contains($password, $number)) {
+                    $password .= $number;
+                }
+            } else {
+                $password .= $number;
+            }
         };
-        if (lengthPassword($password, $length)) {
-            $password .= randmoSpecialCharacters();
+        if (isset($_POST['specialCharacters']) && lengthPassword($password, $length)) {
+            $specialCharacters = randmoSpecialCharacters();
+            if ($_POST['repeatCharacters'] === 'no') {
+                if (!str_contains($password, $specialCharacters)) {
+                    $password .= $specialCharacters;
+                }
+            } else {
+                $password .= $specialCharacters;
+            }
         };
-        /* $password .= randomLetters();
-        $password .= randomLettersUppercase();
-        $password .= rand(0, 9);
-        $password .= randmoSpecialCharacters(); */
     }
 
     return str_shuffle($password);
