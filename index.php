@@ -1,4 +1,9 @@
 <?php
+session_start();
+
+if (isset($_SESSION['error'])) {
+    $error = $_SESSION['error'];
+}
 
 ?>
 
@@ -59,13 +64,9 @@
                 Genera
             </button>
         </form>
-        <?php if ((isset($lengthPassword) && $lengthPassword === '')) : ?>
+        <?php if ((isset($error))) : ?>
             <div class="badge text-bg-danger p-3 mt-4">
-                <?= 'Insert a value before click button' ?>
-            </div>
-        <?php elseif (isset($lengthPassword)) : ?>
-            <div class="badge text-bg-success p-3 mt-4">
-                <?= generatePassword($lengthPassword); ?>
+                <?= $error ?>
             </div>
         <?php endif; ?>
     </div>

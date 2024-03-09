@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 if (isset($_POST['lenght'])) {
     $lengthPassword = $_POST['lenght'];
@@ -83,4 +84,18 @@ function lengthPassword($pass, $len)
         return true;
     }
     return false;
+}
+
+if ((isset($lengthPassword) && $lengthPassword === '')) {
+    session_unset();
+    $_SESSION['error'] = 'Inserisci una lunghezza valida';
+    header('Location: ./index.php');
+} elseif ((!isset($_POST['letters']) && !isset($_POST['numbers']) && !isset($_POST['specialCharacters']))) {
+    session_unset();
+    $_SESSION['error'] = 'Inserire almeno un parametro valido. Scegliere almeno un parametro tra Lettere, Numeri o Simboli.';
+    header('Location: ./index.php');
+} else {
+    session_unset();
+    $_SESSION['password'] = generatePassword($lengthPassword);
+    header('Location: ./results.php');
 }
